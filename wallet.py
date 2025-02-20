@@ -1,3 +1,6 @@
+import pytest
+
+
 class Wallet:
     def __init__(self, balance=0):
         """Ініціалізація гаманця з початковим балансом"""
@@ -32,3 +35,28 @@ if __name__ == "__main__":
 
     my_wallet.withdraw(30)
     print("Після зняття:", my_wallet.get_balance())
+
+
+# Тести для Wallet
+@pytest.fixture
+def wallet():
+    return Wallet(100)
+
+
+def test_initial_balance(wallet):
+    assert wallet.get_balance() == 100
+
+
+def test_deposit(wallet):
+    wallet.deposit(50)
+    assert wallet.get_balance() == 150
+
+
+def test_withdraw_success(wallet):
+    assert wallet.withdraw(30) is True
+    assert wallet.get_balance() == 70
+
+
+def test_withdraw_fail(wallet):
+    assert wallet.withdraw(200) is False
+    assert wallet.get_balance() == 100
