@@ -1,0 +1,1 @@
+Created the base project "Wallet". Added pytest to the "Wallet" project.
